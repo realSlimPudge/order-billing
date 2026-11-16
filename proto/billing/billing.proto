@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package billing;
+option go_package = "order-billing/proto/billing";
+
+message PingRequest {
+    string message = 1;
+}
+
+message PingResponse {
+    string reply = 1;
+}
+
+message ChargeRequest {
+    string user_id = 1;
+    string order_id = 2;
+    int64 amount = 3;
+}
+
+message ChargeResponse {
+    int64 new_balance = 1;
+}
+
+service BillingService {
+    rpc Ping(PingRequest) returns (PingResponse);
+    rpc Charge(ChargeRequest) returns (ChargeResponse);
+}
